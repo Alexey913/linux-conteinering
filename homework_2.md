@@ -29,9 +29,9 @@
 * * *
 * Содержимое файла
 
-**lxc.include = /usr/share/lxc/config/ubuntu.common.conf
+**lxc.include = /usr/share/lxc/config/ubuntu.common.conf**
 
-lxc.init.cmd = /sbin/init systemd.unified_cgroup_hierarchy=1**
+**lxc.init.cmd = /sbin/init systemd.unified_cgroup_hierarchy=1**
 
 * * *
 * Container specific configuration
@@ -65,10 +65,10 @@ lxc.init.cmd = /sbin/init systemd.unified_cgroup_hierarchy=1**
 lxc-start -d -n homework - Скриншот 2
 
 * Заходим в контейнер:
-* 
+
 **lxc-attach -n homework**
 
-*Проверяем память:
+* Проверяем память:
 
 **free -m**
 
