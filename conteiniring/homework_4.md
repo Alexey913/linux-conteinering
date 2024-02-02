@@ -5,7 +5,7 @@
 
 **vim python_app.py**
 
-[Содержимое скрипта](conteiniring/python_app_hw_4)
+[Содержимое скрипта](conteiniring/python_app_hw_4.py)
 
 * Создаем файл для образа:
 
