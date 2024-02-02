@@ -5,7 +5,7 @@
 
 **vim python_app.py**
 
-[Содержимое скрипта](conteiniring/python_app_hw_4.py)
+[Содержимое скрипта](python_app_hw_4.py)
 
 * Создаем файл для образа:
 
@@ -19,7 +19,7 @@
 
 **CMD ["python3", "-i", "./python_app.py"]** #используем интерактивный режим, т.к. понадобится ввод данных пользователя
 
-[Содержимое файла homework4](conteiniring/homework4)
+[Содержимое файла homework4](homework4)
 
 * Создаем образ
 
