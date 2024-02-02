@@ -1,0 +1,3 @@
+FROM python:3.10
+ADD python_app.py .
+CMD ["python3", "-i", "./python_app.py"]
