@@ -4,14 +4,13 @@ services:
 
   mariadb_service_prod:
     image: mariadb:10.10.2
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 12345
     ports:
       - 3036:3036
     deploy:
       mode: replicated
-   	replicas: 3
+   	  replicas: 3
       placement:
         constraints:
           - "node.labels.env==prod"
