@@ -86,21 +86,21 @@
 6* Настроить схему балансировки трафика между несколькими серверами Apache на стороне Nginx с помощью модуля ngx_http_upstream_module.
 
 Вводим следующую конфигурацию:
-	upstream backend {
-		server 127.0.0.1:8080 weight=2;
-		server 127.0.0.1:8081;
+		upstream backend {
+			server 127.0.0.1:8080 weight=2;
+			server 127.0.0.1:8081;
+		}
+		
+		server {
+			listen 80 default_server;
+			listen [::]:80 default_server;
+		
+		root /var/www/html;
+		server_name_;
+		
+			location / {
+				proxy_pass http://backend;
+		proxy_set_header Host $host;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Real-IP $remote_addr;
 	}
-	
-	server {
-		listen 80 default_server;
-		listen [::]:80 default_server;
-	
-	root /var/www/html;
-	server_name_;
-	
-		location / {
-			proxy_pass http://backend;
-	proxy_set_header Host $host;
-	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-	proxy_set_header X-Real-IP $remote_addr;
-}
