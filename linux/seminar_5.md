@@ -11,7 +11,7 @@
 Запускаем файл netplan для редактирования – команда **sudo vim /etc/netplan/*.yaml**
 
 Вводим следующую конфигурацию:
-
+**
 network:
   version: 2
   renderer: networkd
@@ -24,7 +24,7 @@ network:
         addresses:
           - 1.1.1.1
           - 8.8.8.8
-
+**
 Проверка состояния – команда **sudo netplan try**
 
 Принимаем изменения – команда **sudo netplan apply**
