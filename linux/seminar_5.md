@@ -1,15 +1,17 @@
-Задание:
+## Задание:
 1. Настроить статическую конфигурацию (без DHCP) в Ubuntu через ip и netplan. Настроить IP, маршрут по умолчанию и DNS-сервера (1.1.1.1 и 8.8.8.8). Проверить работоспособность сети.
 2. Настроить правила iptables для доступности сервисов на TCP-портах 22, 80 и 443. Также сервер должен иметь возможность устанавливать подключения к серверу обновлений. Остальные подключения запретить.
 3. Запретить любой входящий трафик с IP 3.4.5.6.
 4. Запросы на порт 8090 перенаправлять на порт 80 (на этом же сервере).
 5. Разрешить подключение по SSH только из сети 192.168.0.0/24
 
-Результат:
+## Результат:
 1. Настроить статическую конфигурацию (без DHCP) в Ubuntu через ip и netplan. Настроить IP, маршрут по умолчанию и DNS-сервера (1.1.1.1 и 8.8.8.8). Проверить работоспособность сети.
 
-Запускаем файл netplan для редактирования – команда sudo vim /etc/netplan/*.yaml
+Запускаем файл netplan для редактирования – команда **sudo vim /etc/netplan/*.yaml**
+
 Вводим следующую конфигурацию:
+
 network:
   version: 2
   renderer: networkd
@@ -23,31 +25,46 @@ network:
           - 1.1.1.1
           - 8.8.8.8
 
-Проверка состояния – команда sudo netplan try
-Принимаем изменения – команда sudo netplan apply
-Проверяем доступность хоста – команда ping 8.8.8.8
+Проверка состояния – команда **sudo netplan try**
+
+Принимаем изменения – команда **sudo netplan apply**
+
+Проверяем доступность хоста – команда **ping 8.8.8.8**
 
 2. Настроить правила iptables для доступности сервисов на TCP-портах 22, 80 и 443. Также сервер должен иметь возможность устанавливать подключения к серверу обновлений. Остальные подключения запретить.
 
-Настройка для порта 22 – команда iptables -A INPUT -p tcp --dport=22 -j ACCEPT
-Настройка для порта 443 – команда iptables -A INPUT -p tcp --dport=443 -j ACCEPT
-Настройка для порта 80 – команда iptables -A INPUT -p tcp --dport=80 -j ACCEPT
-Проверка состояния – команда iptables -L -nv
-Разрешаем все исходящие пакеты – команда iptables -A INPUT -i lo -j ACCEPT
+Настройка для порта 22 – команда **iptables -A INPUT -p tcp --dport=22 -j ACCEPT**
+
+Настройка для порта 443 – команда **iptables -A INPUT -p tcp --dport=443 -j ACCEPT**
+
+Настройка для порта 80 – команда **iptables -A INPUT -p tcp --dport=80 -j ACCEPT**
+
+Проверка состояния – команда **iptables -L -nv**
+
+Разрешаем все исходящие пакеты – команда **iptables -A INPUT -i lo -j ACCEPT**
+
 Разрешаем обновления – команды:
-iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A INPUT -p icmp -j ACCEPT
-Отбрасываем все остальные пакеты – команда iptables -P INPUT DROP
+
+**iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT**
+
+**iptables -A INPUT -p icmp -j ACCEPT**
+
+Отбрасываем все остальные пакеты – команда **iptables -P INPUT DROP**
 
 3. Запретить любой входящий трафик с IP 3.4.5.6.
-Команда iptables -I INPUT -p tcp -s 3.4.5.6 --dport 80 -j ACCEPT
 
-4. Запросы на порт 8090 перенаправлять на порт 80 (на этом же сервере).
-Команда iptables -t nat -I PREROUTING -p tcp --dport 8090 -j REDIRECT --to-port 80
-Проверка – команда iptables -L -nv -t nat
+Команда **iptables -I INPUT -p tcp -s 3.4.5.6 --dport 80 -j ACCEPT**
 
-5. Разрешить подключение по SSH только из сети 192.168.0.0/24
-Отсекаем все пакеты через порт 22 (порт SSH) - команда iptables -I INPUT -p TCP –dport 22 -j DROP
+5. Запросы на порт 8090 перенаправлять на порт 80 (на этом же сервере).
+
+Команда **iptables -t nat -I PREROUTING -p tcp --dport 8090 -j REDIRECT --to-port 80**
+
+Проверка – команда **iptables -L -nv -t nat**
+
+7. Разрешить подключение по SSH только из сети 192.168.0.0/24
+
+Отсекаем все пакеты через порт 22 (порт SSH) - команда **iptables -I INPUT -p TCP –dport 22 -j DROP**
+
 Разрешаем пакеты от нужной сети – команда
-iptables -I INPUT -p TCP –dport 22 -s 192.168.0.0/24 -j ACCEPT
 
+**iptables -I INPUT -p TCP –dport 22 -s 192.168.0.0/24 -j ACCEPT**
