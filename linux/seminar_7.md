@@ -262,6 +262,7 @@
 **vim docker-compose.yml**
 
 Меняем содержимое файла:
+
         webserver:
             depends_on:
               - wordpress
