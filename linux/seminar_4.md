@@ -3,13 +3,13 @@
 - Обновляем информацию о репозиториях, указанных в настройках – команда apt update
 - Устанавливаем дополнительные пакеты, необходимые для установки – команды
 
-    **apt-get install \ **
+    **apt-get install**
   
-    **ca-certificates \ **
+    **ca-certificates**
   
-    **curl \ **
+    **curl**
   
-    **gnupg \ **
+    **gnupg**
   
     **lsb-release**
   
