@@ -11,20 +11,32 @@
 Запускаем файл netplan для редактирования – команда **sudo vim /etc/netplan/*.yaml**
 
 Вводим следующую конфигурацию:
-**
+
 network:
+
   version: 2
+  
   renderer: networkd
+  
   ethernets:
+  
     enp0s3:
+    
       dhcp4: no
+      
       addresses: [192.168.0.107/24]
+      
       gateway4: 192.168.0.1
+      
       nameservers:
+      
         addresses:
+        
           - 1.1.1.1
+          
           - 8.8.8.8
-**
+          
+
 Проверка состояния – команда **sudo netplan try**
 
 Принимаем изменения – команда **sudo netplan apply**
