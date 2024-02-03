@@ -12,30 +12,29 @@
 
 Вводим следующую конфигурацию:
 
-  network:
-  
-    version: 2
+    network:
     
-    renderer: networkd
-    
-    ethernets:
-    
-      enp0s3:
+      version: 2
       
-        dhcp4: no
+      renderer: networkd
+      
+      ethernets:
+      
+        enp0s3:
         
-        addresses: [192.168.0.107/24]
-        
-        gateway4: 192.168.0.1
-        
-        nameservers:
-        
-          addresses:
+          dhcp4: no
           
-            - 1.1.1.1
+          addresses: [192.168.0.107/24]
+          
+          gateway4: 192.168.0.1
+          
+          nameservers:
+          
+            addresses:
             
-            - 8.8.8.8
-          
+              - 1.1.1.1
+              
+              - 8.8.8.8 
 
 Проверка состояния – команда **sudo netplan try**
 
